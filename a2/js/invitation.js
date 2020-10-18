@@ -125,6 +125,7 @@ invitationFormElement.addEventListener(
     const formData = getFormData(INVITATION_FORM_SELECTOR);
     handleFormData(formData);
 
+    // Construct HTML for each invitation, then inject it into the DOM
     document.querySelector("#invitations").innerHTML = formRecords
       .map(createInvitationHTML)
       .join("");

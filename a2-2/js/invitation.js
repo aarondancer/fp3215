@@ -120,7 +120,7 @@ function createInvitationHTML(invitationRecord) {
  * data field.)"
  */
 function displayInvitations() {
-  const invitationHtml = "";
+  let invitationHtml = "";
 
   for (let invitation of invitations) {
     invitationHtml += createInvitationHTML(invitation);
@@ -141,13 +141,8 @@ document
 invitationFormElement.addEventListener(
   "submit",
   formHandler(() => {
-    fromEntries = [];
+    invitations = [];
     const formDataObj = getFormData(INVITATION_FORM_SELECTOR);
-
-    for (let [key, value] of Object.entries(formDataObj)) {
-      fromEntries.push({ key, value });
-    }
-
     const volunteers = [];
     const details = {};
 
@@ -169,7 +164,7 @@ invitationFormElement.addEventListener(
     // and assign the records to `formRecords`
     // NOTE: This satisfies "Write JavaScript that stores the form into an array of records once the form is submitted."
     for (let recipientName of volunteers) {
-      fromEntries.push({
+      invitations.push({
         recipientName,
         ...details,
       });

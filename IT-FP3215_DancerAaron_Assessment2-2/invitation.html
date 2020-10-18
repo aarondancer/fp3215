@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <title>Invitation Page</title>
+    <link rel="stylesheet" type="text/css" href="css/main.css" />
+  </head>
+
+  <body>
+    <header>
+      <div class="top">
+        <a class="logo" href="index.html"
+          >CapellaVolunteers<span class="dotcom">.org</span></a
+        >
+      </div>
+      <nav>
+        <ul class="topnav">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="invitation.html" class="active">Invitation</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="registration.html">Registration</a></li>
+        </ul>
+      </nav>
+    </header>
+    <section id="pageForm">
+      <form id="volunteerCountForm" action="#">
+        <label for="volunteerCount">Number of Volunteers:</label>
+        <input type="number" min="1" name="volunteerCount" value="1" />
+      </form>
+      <form id="invitationForm" action="#">
+        <span id="volunteers"></span>
+        <label for="organizationName">Organization name: </label>
+        <input
+          type="text"
+          name="organizationName"
+          placeholder="Enter your Organization Name"
+        />
+
+        <label for="eventDate">Event Date: </label>
+        <input
+          type="text"
+          name="eventDate"
+          placeholder="Enter your Event Date"
+        />
+
+        <label for="websiteURL">URL: </label>
+        <input
+          type="text"
+          name="websiteURL"
+          placeholder="Enter your Website URL"
+        />
+
+        <label for="hostName">Host name: </label>
+        <input type="text" name="hostName" placeholder="Host Name" />
+
+        <input type="submit" value="Submit" />
+      </form>
+    </section>
+    <span id="invitations"></span>
+    <footer>This events site is for IT-FP3215 tasks.</footer>
+    <script src="js/invitation.js"></script>
+  </body>
+</html>

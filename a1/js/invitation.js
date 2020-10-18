@@ -20,10 +20,16 @@ var hostName;
 function handleFormData(formSelector) {
   const formData = new FormData(document.querySelector(formSelector));
 
-  for (let [key, value] of formData.entries()) {
-    // Assign form values to the variables we declared above.
-    globalThis[key] = value;
-  }
+  recipientName = formData.get("recipientName");
+  organizationName = formData.get("organizationName");
+  eventDate = formData.get("eventDate");
+  websiteURL = formData.get("websiteURL");
+  hostName = formData.get("hostName");
+
+  // Alternatively, this can be done dynamically
+  // for (let [key, value] of formData.entries()) {
+  //   globalThis[key] = value;
+  // }
 }
 
 const invitationFormElement = document.querySelector(INVITATION_FORM_SELECTOR);
@@ -33,17 +39,25 @@ invitationFormElement.addEventListener("submit", (e) => {
 
   const formData = handleFormData(INVITATION_FORM_SELECTOR);
 
-  for (let key of Object.keys(formData)) {
-    // globalThis[key] gets the value from the declared variables
-    document.querySelector(`#${key}`).textContent = globalThis[key];
-  }
-
-  // Alternatively this can be done manually:
-  /*
   document.querySelector("#recipientName").textContent = recipientName;
   document.querySelector("#organizationName").textContent = organizationName;
   document.querySelector("#eventDate").textContent = eventDate;
   document.querySelector("#websiteURL").textContent = websiteURL;
   document.querySelector("#hostName").textContent = hostName;
+
+  // Alternatively this can be done dynamically:
+  // for (let key of Object.keys(formData)) {
+  //   document.querySelector(`#${key}`).textContent = globalThis[key];
+  // }
+
+  // My original implementation
+  // This didn't meet the requirements as it doesn't declare variables
+  // for the form fields
+  /*
+    e.preventDefault();
+    const formData = new FormData(document.querySelector("#invitationForm"));
+    for (let [key, value] of formData.entries()) {
+      document.querySelector(`#${key}`).textContent = value;
+    }
   */
 });

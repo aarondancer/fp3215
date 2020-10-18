@@ -122,7 +122,7 @@ function createInvitationHTML(invitationRecord) {
 function displayInvitations() {
   const invitationHtml = "";
 
-  for (let invitation of formEntries) {
+  for (let invitation of invitations) {
     invitationHtml += createInvitationHTML(invitation);
   }
 

@@ -12,20 +12,20 @@
  * @param {*} message
  */
 const regexValidator = (regex, message) => (value) =>
-  Boolean(value) === true ? regex.test(value) || message : true;
+  Boolean(value) === true ? regex.match(value) || message : true;
 
 const usernameValidator = regexValidator(
-  /[A-Z0-9]+$/i,
+  /^[A-Z0-9]+$/i,
   "Username must only contain letters and numbers"
 );
 
 const passwordValidator = regexValidator(
-  /.{8,}$/i,
+  /^.{8,}$/i,
   "Password must be a minimum of 8 characters"
 );
 
 const emailValidator = regexValidator(
-  /([A-Z0-9._-]+@[A-Z0-9._-]+\.[A-Z0-9]+)\w+/i,
+  /^([A-Z0-9._-]+@[A-Z0-9._-]+\.[A-Z0-9]+)\w+/i,
   "Email is not valid"
 );
 

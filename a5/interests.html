@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <title>Interests Page</title>
+    <link rel="stylesheet" type="text/css" href="css/main.css" />
+  </head>
+
+  <body>
+    <header>
+      <div class="top">
+        <a class="logo" href="index.html"
+          >CapellaVolunteers<span class="dotcom">.org</span></a
+        >
+      </div>
+      <nav>
+        <ul class="topnav">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="invitation.html">Invitation</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="registration.html" class="active">Registration</a></li>
+        </ul>
+      </nav>
+    </header>
+    <section id="pageForm">
+      <form id="interestsForm" action="#">
+        <fieldset>
+          <legend>Interests:</legend>
+          <input type="checkbox" name="interests" value="Cats" />Cats
+          <input type="checkbox" name="interests" value="Dogs" />Dogs
+          <input type="checkbox" name="interests" value="Birds" />Birds
+        </fieldset>
+
+        <label for="comments">Comments: </label>
+        <textarea name="comments" placeholder="Enter your comments"></textarea>
+
+        <label for="referredBy">Referred by: </label>
+        <input
+          type="text"
+          name="referredBy"
+          placeholder="Enter your referrer"
+        />
+
+        <label for="signUpNewsletter">Sign up for our newsletter: </label>
+        <input type="radio" name="signUpNewsletter" value="Yes" />
+        Yes <input type="radio" name="signUpNewsletter" value="No" /> No
+
+        <input type="hidden" name="userName" />
+        <input type="hidden" name="password" />
+        <input type="hidden" name="passwordVerify" />
+        <input type="hidden" name="firstName" />
+        <input type="hidden" name="lastName" />
+        <input type="hidden" name="email" />
+        <input type="hidden" name="phoneNumber" />
+
+        <input type="submit" value="Register" />
+      </form>
+    </section>
+
+    <footer>This events site is for IT-FP3215 tasks.</footer>
+    <script src="js/form.js"></script>
+    <script src="js/cookie.js"></script>
+    <script src="js/interests.js"></script>
+  </body>
+</html>

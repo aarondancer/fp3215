@@ -6,13 +6,13 @@
 */
 
 /**
- * Constructs a validator for regex
+ * Constructs a validator for regex. If the given value is empty, do not validate.
  *
  * @param {*} regex
  * @param {*} message
  */
 const regexValidator = (regex, message) => (value) =>
-  regex.test(value) || message;
+  Boolean(value) === true ? regex.test(value) || message : true;
 
 const usernameValidator = regexValidator(
   /[A-Z0-9]+$/i,
@@ -37,6 +37,8 @@ const phoneValidator = regexValidator(
 /**
  * Fails validation if value is empty
  *
+ * Satisfies: "Write JavaScript that defines that a field is required and
+ * generates an appropriate error message if the field has not been completed."
  * @param {*} value
  */
 const requiredValidator = (value) => Boolean(value) || "Required";
@@ -62,21 +64,24 @@ const oneOfValidator = (options, message) => (value) =>
 // #endregion
 
 // Validation rules for each form field
+// Satisfies: "Write JavaScript that defines that a field is required and
+// generates an appropriate error message if the field has not been completed."
+// Satisfies: "Write JavaScript to validate all input fields per the formatting
+// definitions that the field values should be checked against
+// (found in the overview) after each field.""
 const fields = {
   userName: [requiredValidator, usernameValidator],
   password: [requiredValidator, passwordValidator],
   passwordVerify: [
     requiredValidator,
+    passwordValidator,
     matchValidator("password", "Passwords do not match"),
   ],
   firstName: [requiredValidator],
   lastName: [requiredValidator],
-  email: [requiredValidator, emailValidator],
-  phoneNumber: [requiredValidator, phoneValidator],
-  signUpNewsletter: [
-    requiredValidator,
-    oneOfValidator(["Yes", "No"], "Select Yes or No"),
-  ],
+  email: [emailValidator],
+  phoneNumber: [phoneValidator],
+  signUpNewsletter: [oneOfValidator(["Yes", "No"], "Select Yes or No")],
 };
 
 /**
@@ -116,6 +121,10 @@ function setInputStyle(id, style) {
 /**
  * Displays / hides error messages based on validation
  *
+ * Satisfies: "Write JavaScript that displays an appropriate error
+ * correction message (next to the field) in the event a form entry
+ * error has been made."
+ *
  * @param {*} id
  * @param {*} message
  */
@@ -146,6 +155,17 @@ function validateField(name, value, formData) {
 
   setInputStyle(name, error === undefined ? "valid" : "error");
   displayError(name, error);
+
+  return error === undefined;
+}
+
+/**
+ * Focuses the field given by name
+ *
+ * @param {*} name
+ */
+function focusField(name) {
+  document.getElementsByName(name)[0].focus();
 }
 
 /**
@@ -153,12 +173,26 @@ function validateField(name, value, formData) {
  */
 function validateForm() {
   const formData = getFormData("#registrationForm");
+  let firstErrorFieldName;
 
-  Object.entries(formData).forEach(([name, value]) =>
-    validateField(name, value, formData)
-  );
+  Object.entries(formData).forEach(([name, value]) => {
+    const result = validateField(name, value, formData);
+
+    if (result !== true && firstErrorFieldName === undefined) {
+      firstErrorFieldName = name;
+      // Satisfies: "Write a JavaScript that will default the user's cursor to
+      // the first erroneous input field in the event that there is an input error."
+      focusField(name);
+    }
+  });
+
+  if (firstErrorFieldName === undefined) {
+    // All fields passed validation
+    window.location.href = "confirm.html";
+  }
 }
 
+// Satisfies: "Create a submit button that executes the validation when submitted."
 document
   .getElementById("registrationForm")
   .addEventListener("submit", formHandler(validateForm));
